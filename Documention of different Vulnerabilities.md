@@ -53,7 +53,7 @@ User controlled data returned in HTTP response contains Javascript code.
 
 Below fig illustrates how simple XSS attack work:
 
-[here] http://www.acunetix.com/wp-content/uploads/2012/10/how-xss-works-910x404.png
+[here] (http://www.acunetix.com/wp-content/uploads/2012/10/how-xss-works-910x404.png)
 
 ##Example:
 

